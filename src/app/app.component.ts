@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'recipe-book';
+  recipesSelected = true;
+
+  selectRecipes(e){
+    this.recipesSelected = true;
+  }
+
+  selectShopping(e){
+    this.recipesSelected = false;
+  }
 }
