@@ -2,12 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div id="recipes" style="margin-bottom: 4rem;">
-        <app-recipes *ngIf="recipesSelected == true"></app-recipes>
-      </div>
-      <div class="shopping-list">
-        <app-shopping-list *ngIf="recipesSelected == false"></app-shopping-list>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
