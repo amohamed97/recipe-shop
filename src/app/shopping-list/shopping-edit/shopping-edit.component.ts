@@ -1,5 +1,5 @@
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
-import { Component, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
@@ -10,7 +10,7 @@ import { ShoppingListService } from '../shopping-list.service';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css'],
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
   @Output() ingredientAdded = new EventEmitter<Ingredient>();
 
   @ViewChild('f') slForm: NgForm;
@@ -33,6 +33,10 @@ export class ShoppingEditComponent implements OnInit {
         })
       }
     );
+  }
+
+  ngOnDestroy(): void{
+    this.editingSubscription.unsubscribe()
   }
 
   submitForm(form: NgForm) {
