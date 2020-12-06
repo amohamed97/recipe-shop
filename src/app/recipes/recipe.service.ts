@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Recipe } from './recipe.model';
@@ -26,6 +27,7 @@ export class RecipeService {
   ];
 
   recipeSelected = new EventEmitter<Recipe>();
+  recipesUpdated = new EventEmitter<Recipe[]>();
 
   getRecipes() {
     return this.recipes.slice();
@@ -33,6 +35,21 @@ export class RecipeService {
 
   getRecipeById(id:number){
     return this.recipes[id]
+  }
+
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe)
+    this.recipesUpdated.emit(this.recipes.slice())
+  }
+
+  updateRecipe(index, recipe){
+    this.recipes[index] = recipe
+    this.recipesUpdated.emit(this.recipes.slice())
+  }
+
+  deleteRecipe(index){
+    this.recipes.splice(index, 1)
+    this.recipesUpdated.emit(this.recipes.slice())
   }
 
   setSelectedRecipe(recipe) {}
